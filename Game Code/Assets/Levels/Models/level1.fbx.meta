@@ -4,10 +4,20 @@ ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Building
+    100004: Ground
     400000: //RootNode
+    400002: Building
+    400004: Ground
     2300000: //RootNode
+    2300002: Building
+    2300004: Ground
     3300000: //RootNode
+    3300002: Building
+    3300004: Ground
     4300000: Cube
+    4300002: Building
+    4300004: Ground
     9500000: //RootNode
   materials:
     importMaterials: 1
