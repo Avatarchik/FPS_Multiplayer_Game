@@ -31,7 +31,7 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: Detail
       value:
-        scalar[0]: .5
+        scalar[0]: 1
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -45,9 +45,9 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: Rock_Color
       value:
-        scalar[0]: .400000006
-        scalar[1]: .370000005
-        scalar[2]: .349999994
+        scalar[0]: .800000012
+        scalar[1]: .611764729
+        scalar[2]: .160784319
         scalar[3]: 0
         texture: {instanceID: 0}
     - name: Rock_Edges

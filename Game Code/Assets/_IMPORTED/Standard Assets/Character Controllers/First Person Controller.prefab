@@ -258,7 +258,7 @@ MonoBehaviour:
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-    maxGroundAcceleration: 20
+    maxGroundAcceleration: 100
     maxAirAcceleration: 15
     gravity: 20
     maxFallSpeed: 20
