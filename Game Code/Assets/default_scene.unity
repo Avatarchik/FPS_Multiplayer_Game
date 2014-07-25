@@ -1729,7 +1729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364136f95b1395c48888283ce9c7bb67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standyCamera: {fileID: 980449784}
+  standyCamera: {fileID: 980449780}
   spawnSpots: []
 --- !u!1 &1750021348
 GameObject:
