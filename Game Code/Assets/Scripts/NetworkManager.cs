@@ -52,9 +52,9 @@ public class NetworkManager : MonoBehaviour {
 
 		GameObject myPlayerGameObject = PhotonNetwork.Instantiate("PlayerController",  mySpawnSpot.transform.position, mySpawnSpot.transform.rotation, 0);
 
-		((MonoBehaviour)myPlayerGameObject.GetComponent("FPSInputController")).enabled = true;;
+		//((MonoBehaviour)myPlayerGameObject.GetComponent("FPSInputController")).enabled = true;;
 		((MonoBehaviour)myPlayerGameObject.GetComponent("MouseLook")).enabled = true;
-		((MonoBehaviour)myPlayerGameObject.GetComponent("CharacterMotor")).enabled = true;
+		((MonoBehaviour)myPlayerGameObject.GetComponent("PlayerMovement")).enabled = true;
 		myPlayerGameObject.transform.FindChild ("Main Camera").gameObject.SetActive(true);
 
 

@@ -51,6 +51,7 @@
      <Compile Include="Assets\_IMPORTED\Standard Assets\Character Controllers\Sources\Scripts\PlatformInputController.js" />
      <Compile Include="Assets\_IMPORTED\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonCamera.js" />
      <Compile Include="Assets\_IMPORTED\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" />
+     <None Include="Assets\_IMPORTED\Stealth\Shaders\ReflectiveDiffuseSpecTransp.shader" />
      <None Include="Assets\_IMPORTED\Plugins\release_history.txt" />
      <None Include="Assets\_IMPORTED\Photon Unity Networking\readme.txt" />
      <None Include="Assets\_IMPORTED\Plugins\Photon3Unity3D.xml" />
