@@ -6,6 +6,8 @@ public class NetworkManager : MonoBehaviour {
 	public GameObject standyCamera;
 	public SpawnSpot[] spawnSpots;
 
+	public bool offlineMode = false;
+
 	// Use this for initialization
 	void Start () {
 
@@ -15,7 +17,13 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 	void Connect() {
-		PhotonNetwork.ConnectUsingSettings( "MultiFPS v1.0" );
+		if (offlineMode) {
+			PhotonNetwork.offlineMode = true;
+			OnJoinedLobby();
+		}
+		else {
+			PhotonNetwork.ConnectUsingSettings( "MultiFPS v1.0" );
+		}
 	}
 
 	void OnGUI () {
@@ -55,6 +63,7 @@ public class NetworkManager : MonoBehaviour {
 		//((MonoBehaviour)myPlayerGameObject.GetComponent("FPSInputController")).enabled = true;;
 		((MonoBehaviour)myPlayerGameObject.GetComponent("MouseLook")).enabled = true;
 		((MonoBehaviour)myPlayerGameObject.GetComponent("PlayerMovement")).enabled = true;
+		((MonoBehaviour)myPlayerGameObject.GetComponent("PlayerShooting")).enabled = true;
 		myPlayerGameObject.transform.FindChild ("Main Camera").gameObject.SetActive(true);
 
 
