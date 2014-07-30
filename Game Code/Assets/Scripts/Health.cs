@@ -11,7 +11,7 @@ public class Health : MonoBehaviour {
 		currentHitPoints = hitPoints;
 	}
 
-
+	[RPC]
 	public void TakeDamage(float aAmount) {
 		currentHitPoints -= aAmount;
 
@@ -19,8 +19,12 @@ public class Health : MonoBehaviour {
 			Die ();
 		}
 	}
-
+	
 	void Die() {
-		Destroy (gameObject);
+		if (GetComponent<PhotonView> ().instantiationId == 0) {
+			Destroy (gameObject);
+		} else if (PhotonNetwork.isMasterClient) {
+			PhotonNetwork.Destroy (gameObject);
+		}
 	}
 }

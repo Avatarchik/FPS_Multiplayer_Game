@@ -44,7 +44,15 @@ public class PlayerShooting : MonoBehaviour {
 			// EX: hit the graphics but the crate has teh health
 
 			if (h != null) {
-				h.TakeDamage(damage);
+				// Equivalent of running h.TakeDamage(damage); but is sent across the network
+				PhotonView pv = h.GetComponent<PhotonView>();
+
+				if(pv == null) {
+					Debug.Log ("No PhotonView found");
+				}
+				else {
+					pv.RPC("TakeDamage", PhotonTargets.All, damage);
+				}
 			}
 		}
 
