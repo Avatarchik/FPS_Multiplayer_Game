@@ -8,6 +8,8 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 
 	Animator anim;
 
+	bool gotFirstUpdate = false;
+
 	// Use this for initialization
 	void Awake () {
 		anim = GetComponent<Animator> ();
@@ -42,6 +44,14 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 			realRotation = (Quaternion) aStream.ReceiveNext();
 			anim.SetFloat("Speed", (float)aStream.ReceiveNext());
 			anim.SetBool("Jumping", (bool)aStream.ReceiveNext());
+
+			if(gotFirstUpdate == false) {
+				transform.position = realPosition;
+				transform.rotation = realRotation;
+				gotFirstUpdate = true;
+			}
+
+
 		}
 	}
 

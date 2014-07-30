@@ -26,4 +26,5 @@ MonoBehaviour:
   - OnAwakeRPC
   - DestroyRpc
   - TakeDamage
+  - AddChatMessage_RPC
   DisableAutoOpenWizard: 0

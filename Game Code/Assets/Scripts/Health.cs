@@ -15,15 +15,23 @@ public class Health : MonoBehaviour {
 	public void TakeDamage(float aAmount) {
 		currentHitPoints -= aAmount;
 
+		string outstring = "Got hit, remaining health: " + currentHitPoints.ToString ();
+		Debug.Log (outstring);
+
 		if (currentHitPoints <= 0) {
 			Die ();
 		}
 	}
 	
 	void Die() {
-		if (GetComponent<PhotonView> ().instantiationId == 0) {
+
+		Debug.Log("Object should be dead.");
+
+		PhotonView pv = GetComponent<PhotonView> ();
+
+		if (pv.instantiationId == 0) {
 			Destroy (gameObject);
-		} else if (PhotonNetwork.isMasterClient) {
+		} else if (pv.isMine) {
 			PhotonNetwork.Destroy (gameObject);
 		}
 	}

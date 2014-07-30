@@ -41,7 +41,7 @@ public class PlayerShooting : MonoBehaviour {
 			}
 
 			//Once we get here hitTransform may not be what we started with
-			// EX: hit the graphics but the crate has teh health
+			// EX: hit the graphics but the crate has the health
 
 			if (h != null) {
 				// Equivalent of running h.TakeDamage(damage); but is sent across the network
@@ -51,7 +51,7 @@ public class PlayerShooting : MonoBehaviour {
 					Debug.Log ("No PhotonView found");
 				}
 				else {
-					pv.RPC("TakeDamage", PhotonTargets.All, damage);
+					pv.RPC("TakeDamage", PhotonTargets.AllBuffered, damage);
 				}
 			}
 		}
