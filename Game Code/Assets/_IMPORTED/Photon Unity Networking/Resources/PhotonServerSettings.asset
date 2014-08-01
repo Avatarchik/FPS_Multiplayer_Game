@@ -27,4 +27,5 @@ MonoBehaviour:
   - DestroyRpc
   - TakeDamage
   - AddChatMessage_RPC
+  - SniperBulletFX
   DisableAutoOpenWizard: 0

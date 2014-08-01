@@ -7,6 +7,18 @@ public class PlayerShooting : MonoBehaviour {
 	public float fireRate = 0.5f;
 	float cooldown = 0f;
 
+	FXManager fxManager;
+	Animator anim;
+
+	void Start () {
+		anim = GetComponent<Animator> ();
+		fxManager = GameObject.FindObjectOfType<FXManager> ();
+
+		if (fxManager == null) {
+			Debug.LogError ("Couldn't find an FXManager");
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		cooldown -= (Time.deltaTime + .001f);
@@ -14,13 +26,14 @@ public class PlayerShooting : MonoBehaviour {
 		if(Input.GetButtonDown("Fire1")) {
 			Fire ();
 		}
-
 	}
 
 	void Fire() {
 		if (cooldown > 0) {
 			return;
 		}
+
+		anim.SetBool ("Jumping", false);
 
 		Debug.Log ("Firing our weapon!");
 
@@ -30,6 +43,7 @@ public class PlayerShooting : MonoBehaviour {
 
 		hitTransform = FindClosestHitObject (ray, out hitPoint);
 
+		// hit something
 		if (hitTransform != null) {
 			Debug.Log("We hit: " + hitTransform.name);
 
@@ -53,6 +67,17 @@ public class PlayerShooting : MonoBehaviour {
 				else {
 					pv.RPC("TakeDamage", PhotonTargets.AllBuffered, damage);
 				}
+			}
+
+			if (fxManager != null) {
+				fxManager.GetComponent<PhotonView>().RPC ("SniperBulletFX", PhotonTargets.All, Camera.main.transform.position, hitPoint);
+			}
+		}
+		// we hit empty space
+		else {
+			if (fxManager != null) {
+				hitPoint = Camera.main.transform.position + (Camera.main.transform.forward * 100f);
+				fxManager.GetComponent<PhotonView>().RPC ("SniperBulletFX", PhotonTargets.All, Camera.main.transform.position, hitPoint);
 			}
 		}
 

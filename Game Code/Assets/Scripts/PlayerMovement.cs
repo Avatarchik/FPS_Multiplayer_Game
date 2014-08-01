@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Screen.lockCursor = true;
+
 		cc = GetComponent<CharacterController> ();
 		anim = GetComponent<Animator> ();
 	}
