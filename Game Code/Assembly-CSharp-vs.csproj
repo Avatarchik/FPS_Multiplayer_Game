@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\PlayerShooting.cs" />
      <Compile Include="Assets\Scripts\SelfDestruct.cs" />
      <Compile Include="Assets\Scripts\SpawnSpot.cs" />
+     <Compile Include="Assets\Scripts\TeamMember.cs" />
      <Compile Include="Assets\Scripts\WeaponData.cs" />
      <Compile Include="Assets\_IMPORTED\Photon Unity Networking\Plugins\PhotonNetwork\CustomTypes.cs" />
      <Compile Include="Assets\_IMPORTED\Photon Unity Networking\Plugins\PhotonNetwork\Enums.cs" />

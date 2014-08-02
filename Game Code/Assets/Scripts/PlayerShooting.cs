@@ -72,7 +72,12 @@ public class PlayerShooting : MonoBehaviour {
 					Debug.Log ("No PhotonView found");
 				}
 				else {
-					pv.RPC("TakeDamage", PhotonTargets.AllBuffered, weaponData.damage);
+					TeamMember tm = hitTransform.GetComponent<TeamMember>();	
+					TeamMember myTm = this.GetComponent<TeamMember>();	
+
+					if(tm==null || tm.teamID == 0 || myTm == null || myTm.teamID == 0 || tm.teamID != myTm.teamID) {
+						pv.RPC("TakeDamage", PhotonTargets.AllBuffered, weaponData.damage);
+					}
 				}
 			}
 

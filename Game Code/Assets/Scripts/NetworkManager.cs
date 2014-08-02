@@ -14,6 +14,9 @@ public class NetworkManager : MonoBehaviour {
 
 	public float respawnTimer = 0;
 
+	bool hasPickedTeam = false;
+	int teamID = 0;
+
 	// Use this for initialization
 	void Start () {
 		spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
@@ -27,7 +30,7 @@ public class NetworkManager : MonoBehaviour {
 			respawnTimer -= Time.deltaTime;
 
 			if(respawnTimer <= 0) {
-				SpawnMyPlayer();
+				SpawnMyPlayer(teamID);
 			}
 		}
 	}
@@ -58,6 +61,7 @@ public class NetworkManager : MonoBehaviour {
 		GUILayout.Label (PhotonNetwork.connectionStateDetailed.ToString ());
 
 		if (PhotonNetwork.connected == false && connecting == false) {
+			// We have not yet connected so ask fro online/offline mode
 			GUILayout.BeginArea(new Rect(0,0, Screen.width, Screen.height));
 			GUILayout.BeginHorizontal();
 			GUILayout.FlexibleSpace();
@@ -87,16 +91,46 @@ public class NetworkManager : MonoBehaviour {
 		}
 
 		if(PhotonNetwork.connected == true && connecting == false) {
-			GUILayout.BeginArea(new Rect(0,0, Screen.width, Screen.height));
-			GUILayout.BeginVertical();
-			GUILayout.FlexibleSpace();
-
-			foreach (string msg in chatMessages) {
-				GUILayout.Label(msg);
+			if(hasPickedTeam) {
+				// we are fully connected, make sure to display the chat box
+				GUILayout.BeginArea(new Rect(0,0, Screen.width, Screen.height));
+				GUILayout.BeginVertical();
+				GUILayout.FlexibleSpace();
+	
+				foreach (string msg in chatMessages) {
+					GUILayout.Label(msg);
+				}
+	
+				GUILayout.EndVertical();
+				GUILayout.EndArea();
 			}
+			else {
+				// Player has not yet selected a team
+				GUILayout.BeginArea(new Rect(0,0, Screen.width, Screen.height));
+				GUILayout.BeginHorizontal();
+				GUILayout.FlexibleSpace();
+				GUILayout.BeginVertical();
+				GUILayout.FlexibleSpace();
 
-			GUILayout.EndVertical();
-			GUILayout.EndArea();
+				if(GUILayout.Button("Red Team")){
+					SpawnMyPlayer(1);
+				}
+				if(GUILayout.Button("Green Team")) {
+					SpawnMyPlayer(2);
+				}
+				if(GUILayout.Button("Random")) {
+					SpawnMyPlayer(Random.Range(1,3));
+				}
+				if(GUILayout.Button("FFA")) {
+					SpawnMyPlayer(0);
+				}
+
+				GUILayout.FlexibleSpace();
+				GUILayout.EndVertical();
+				GUILayout.FlexibleSpace();
+				GUILayout.EndHorizontal();
+				GUILayout.EndArea();
+			}
 		}
 	}
 
@@ -115,11 +149,14 @@ public class NetworkManager : MonoBehaviour {
 
 	void OnJoinedRoom () {
 		Debug.Log ("OnJoinedRoom");
+		
 		connecting = false;
-		SpawnMyPlayer ();
 	}
 
-	void SpawnMyPlayer () {
+	void SpawnMyPlayer (int teamID) {
+		
+		hasPickedTeam = true;
+		this.teamID = teamID;
 
 		AddChatMessage ("Spawning player: " + PhotonNetwork.player.name);
 
@@ -136,9 +173,10 @@ public class NetworkManager : MonoBehaviour {
 		((MonoBehaviour)myPlayerGameObject.GetComponent("MouseLook")).enabled = true;
 		((MonoBehaviour)myPlayerGameObject.GetComponent("PlayerMovement")).enabled = true;
 		((MonoBehaviour)myPlayerGameObject.GetComponent("PlayerShooting")).enabled = true;
+		
+		myPlayerGameObject.GetComponent<PhotonView>().RPC ("SetTeamID", PhotonTargets.AllBuffered, teamID);		
+
 		myPlayerGameObject.transform.FindChild ("Main Camera").gameObject.SetActive(true);
-
-
 		standyCamera.SetActive(false);
 	}
 }
