@@ -66,6 +66,12 @@ public class PlayerMovement : MonoBehaviour {
 		lDistance.y = verticalVelocity * Time.deltaTime;
 
 		cc.Move (lDistance);
+
+
+		// if we have fallen too far then lets kill us off
+		if (transform.position.y <= -50) {
+			this.GetComponent<Health>().TakeDamage(float.MaxValue);
+		}
 	}
 
 	void AdjustAimAngle() {

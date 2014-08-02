@@ -31,14 +31,14 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: Cracks
       value:
-        scalar[0]: .5
+        scalar[0]: 1
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
     - name: Dirtiness
       value:
-        scalar[0]: .5
+        scalar[0]: .319999993
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -101,7 +101,7 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: Depth
       value:
-        scalar[0]: 0
+        scalar[0]: -1
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -115,14 +115,14 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: Normal
       value:
-        scalar[0]: .5
+        scalar[0]: .349999994
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
     - name: Emboss
       value:
-        scalar[0]: .5
+        scalar[0]: 1
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -150,7 +150,7 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: Contrast
       value:
-        scalar[0]: 0
+        scalar[0]: .129999995
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0

@@ -12,6 +12,8 @@ public class NetworkManager : MonoBehaviour {
 	List<string> chatMessages;
 	int maxChatMessages = 5;
 
+	public float respawnTimer = 0;
+
 	// Use this for initialization
 	void Start () {
 		spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
@@ -19,6 +21,17 @@ public class NetworkManager : MonoBehaviour {
 
 		chatMessages = new List<string> ();
 	}
+
+	void Update() {
+		if (respawnTimer > 0) {
+			respawnTimer -= Time.deltaTime;
+
+			if(respawnTimer <= 0) {
+				SpawnMyPlayer();
+			}
+		}
+	}
+
 
 	void OnDestroy() {
 		PlayerPrefs.SetString ("Username", PhotonNetwork.player.name);
