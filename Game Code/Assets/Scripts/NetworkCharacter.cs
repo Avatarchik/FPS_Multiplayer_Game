@@ -5,6 +5,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 
 	Vector3 realPosition = Vector3.zero;
 	Quaternion realRotation = Quaternion.identity;
+	float realAimAngle;
 
 	Animator anim;
 
@@ -26,6 +27,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		} else {
 			transform.position = Vector3.Lerp(transform.position, realPosition, 0.1f);
 			transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, 0.1f);
+			anim.SetFloat("AimAngle", Mathf.Lerp(anim.GetFloat("AimAngle"), realAimAngle, 0.1f));
 		}
 	}
 
@@ -36,6 +38,7 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 			aStream.SendNext(transform.rotation);
 			aStream.SendNext(anim.GetFloat("Speed"));
 			aStream.SendNext(anim.GetBool("Jumping"));
+			aStream.SendNext (anim.GetBool("AimAngle"));
 		}
 		else {
 			// this is someone elses player, we need to receive their player and update
@@ -44,10 +47,12 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 			realRotation = (Quaternion) aStream.ReceiveNext();
 			anim.SetFloat("Speed", (float)aStream.ReceiveNext());
 			anim.SetBool("Jumping", (bool)aStream.ReceiveNext());
+			realAimAngle  = (float) aStream.ReceiveNext();
 
 			if(gotFirstUpdate == false) {
 				transform.position = realPosition;
 				transform.rotation = realRotation;
+				anim.SetBool("AimAngle", realAimAngle);
 				gotFirstUpdate = true;
 			}
 

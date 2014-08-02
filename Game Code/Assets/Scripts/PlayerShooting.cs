@@ -3,8 +3,7 @@ using System.Collections;
 
 public class PlayerShooting : MonoBehaviour {
 
-	public float damage = 25f;
-	public float fireRate = 0.5f;
+	WeaponData weaponData;
 	float cooldown = 0f;
 
 	FXManager fxManager;
@@ -29,6 +28,14 @@ public class PlayerShooting : MonoBehaviour {
 	}
 
 	void Fire() {
+		if (weaponData == null) {
+			weaponData = gameObject.GetComponentInChildren<WeaponData> ();
+			if (weaponData == null) {
+				Debug.Log ("Did not find any WeaponData in our children");
+				return;
+			}
+		}
+
 		if (cooldown > 0) {
 			return;
 		}
@@ -65,23 +72,27 @@ public class PlayerShooting : MonoBehaviour {
 					Debug.Log ("No PhotonView found");
 				}
 				else {
-					pv.RPC("TakeDamage", PhotonTargets.AllBuffered, damage);
+					pv.RPC("TakeDamage", PhotonTargets.AllBuffered, weaponData.damage);
 				}
 			}
 
 			if (fxManager != null) {
-				fxManager.GetComponent<PhotonView>().RPC ("SniperBulletFX", PhotonTargets.All, Camera.main.transform.position, hitPoint);
+				DoGunFX(hitPoint);
 			}
 		}
 		// we hit empty space
 		else {
 			if (fxManager != null) {
 				hitPoint = Camera.main.transform.position + (Camera.main.transform.forward * 100f);
-				fxManager.GetComponent<PhotonView>().RPC ("SniperBulletFX", PhotonTargets.All, Camera.main.transform.position, hitPoint);
+				DoGunFX(hitPoint);
 			}
 		}
 
-		cooldown = fireRate;
+		cooldown = weaponData.fireRate;
+	}
+
+	void DoGunFX(Vector3 hitPoint) {
+		fxManager.GetComponent<PhotonView> ().RPC ("SniperBulletFX", PhotonTargets.All, weaponData.transform.position, hitPoint);
 	}
 
 	Transform FindClosestHitObject(Ray ray, out Vector3 hitPoint) {

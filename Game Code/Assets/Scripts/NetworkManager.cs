@@ -38,7 +38,7 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 	void Connect() {
-		PhotonNetwork.ConnectUsingSettings( "MultiFPS v1.0" );
+		PhotonNetwork.ConnectUsingSettings( "MultiFPS v1.1" );
 	}
 
 	void OnGUI () {
