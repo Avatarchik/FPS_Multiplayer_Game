@@ -4,7 +4,9 @@ using System.Collections.Generic;
 public class NetworkManager : MonoBehaviour {
 
 	public GameObject standyCamera;
+
 	public SpawnSpot[] spawnSpots;
+	List<SpawnSpot> myTeamSpawnSpots;
 
 	public bool offlineMode = false;
 	bool connecting = false;
@@ -20,6 +22,7 @@ public class NetworkManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		spawnSpots = GameObject.FindObjectsOfType<SpawnSpot> ();
+
 		PhotonNetwork.player.name = PlayerPrefs.GetString ("Username", "Big Ass Hoob");
 
 		chatMessages = new List<string> ();
@@ -54,7 +57,7 @@ public class NetworkManager : MonoBehaviour {
 	}
 
 	void Connect() {
-		PhotonNetwork.ConnectUsingSettings( "MultiFPS v1.1" );
+		PhotonNetwork.ConnectUsingSettings( "MultiFPS v1.2" );
 	}
 
 	void OnGUI () {
@@ -155,17 +158,27 @@ public class NetworkManager : MonoBehaviour {
 
 	void SpawnMyPlayer (int teamID) {
 		
-		hasPickedTeam = true;
-		this.teamID = teamID;
+		if (hasPickedTeam == false) {
+			hasPickedTeam = true;
+			this.teamID = teamID;
+
+			myTeamSpawnSpots = new List<SpawnSpot>();
+			foreach (SpawnSpot ss in spawnSpots) {
+				if (ss.teamID == teamID || teamID == 0) {
+					myTeamSpawnSpots.Add(ss);
+				}
+			}
+		}
 
 		AddChatMessage ("Spawning player: " + PhotonNetwork.player.name);
 
-		if (spawnSpots == null) {
-			Debug.Log ("We dont have any spawn spots!!");
+		if (spawnSpots == null || myTeamSpawnSpots.Count == 0) {
+			Debug.LogError ("We dont have any spawn spots!!");
 			return;
 		}
 
-		SpawnSpot mySpawnSpot = spawnSpots [Random.Range (0, spawnSpots.Length)];
+		Debug.Log("lets get our spot! We have " + myTeamSpawnSpots.Count.ToString() );
+		SpawnSpot mySpawnSpot = myTeamSpawnSpots[Random.Range (0, myTeamSpawnSpots.Count)];
 
 		GameObject myPlayerGameObject = PhotonNetwork.Instantiate("PlayerController",  mySpawnSpot.transform.position, mySpawnSpot.transform.rotation, 0);
 
