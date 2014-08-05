@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>D:/Programs/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>D:/Programs/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -58,16 +58,16 @@
      <None Include="Assets\_IMPORTED\Plugins\Photon3Unity3D.xml" />
      <None Include="Assets\_IMPORTED\Photon Unity Networking\changelog.txt" />
  <Reference Include="Assembly-UnityScript">
- <HintPath>D:/Documents/Unity Workspace/FPS_Multiplayer_Game/Game Code/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ <HintPath>C:/Personal/GitHub Projects/FPS_Multiplayer_Game/Game Code/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>D:/Documents/Unity Workspace/FPS_Multiplayer_Game/Game Code/Assets/_IMPORTED/Photon Unity Networking/Editor/PhotonNetwork/Newtonsoft.Json.dll</HintPath>
+ <HintPath>C:/Personal/GitHub Projects/FPS_Multiplayer_Game/Game Code/Assets/_IMPORTED/Photon Unity Networking/Editor/PhotonNetwork/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="Photon3Unity3D">
- <HintPath>D:/Documents/Unity Workspace/FPS_Multiplayer_Game/Game Code/Assets/_IMPORTED/Plugins/Photon3Unity3D.dll</HintPath>
+ <HintPath>C:/Personal/GitHub Projects/FPS_Multiplayer_Game/Game Code/Assets/_IMPORTED/Plugins/Photon3Unity3D.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
- <HintPath>D:/Programs/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
