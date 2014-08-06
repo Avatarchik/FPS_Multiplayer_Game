@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
 		if (cc.isGrounded && Input.GetButtonDown ("Jump")) {
-				verticalVelocity = jumpSpeed;
+			verticalVelocity = jumpSpeed;
 		}
 
 		AdjustAimAngle ();
